@@ -1,0 +1,60 @@
+{% macro macro_competition(competition) %}
+
+<div class="container row border border-dark rounded-2 p-3 mt-2">
+    <div class="col-md-6 row text-start">
+        <span><span class="fs-3 fw-bold">{{ competition.title }}</span> <span class="fs-5">{{ competition.date }}</span></span>
+        <p>{{ competition.place }}</p>
+    </div>
+    <div class="col-md-6">
+        <span>Лошади, участвующие в соревновании:</span>
+        <ul class="list-group list-group-flush">
+            {% for horse in competition.horses %}
+                <li class="list-group-item">{{ horse.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="w-100">
+        {% set results = competition.result %}
+        {% if not results %}
+        {% if current_user.is_authenticated %}
+            {% if current_user.is_administrator %}
+            <a href="{{ url_for('results.create_form', competition_id=competition.id) }}" class="btn btn-primary">Добавить результаты</a>
+            {% endif %}
+        {% endif %}
+        {% else %}
+        <hr class="mt-3">
+        <h3>Результаты соревнования</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Имя лошади</th>
+                  <th scope="col">Место</th>
+                  <th scope="col">Время</th>
+                  <th scope="col">Жокей</th>
+                  <th scope="col">Владелец</th>
+
+                </tr>
+              </thead>
+        {% for result in results %}
+
+          <tbody>
+            <tr>
+              <th scope="row">{{ loop.index }}</th>
+              <td>{{ result.horse.name }}</td>
+              <td>{{ result.place }}</td>
+              <td>{{ result.time }}</td>
+              <td>{{ result.jokey.name }}</td>
+              <td>{{ result.owner.name }}</td>
+
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endmacro %}

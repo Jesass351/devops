@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="" method="post">
+        <div class="container my-4 d-flex justify-content-center row">
+            <div class="col-md-8">
+                <select name="horse_id" id="horse_id" class="form-select">
+                    {% for horse in horses %}
+                        <option value="{{ horse.id }}">{{ horse.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">Найти</button>
+            </div>
+
+    </div>
+    </form>
+{% if selected_horse %}
+<div class="container">
+    <h2>{{ selected_horse.name }}</h2>
+    <h4>Жокей: {{ selected_horse.jokey.name }}</h4>
+    <h4>Владелец: {{ selected_horse.owner.name }}</h4>
+    <span>Пол: {{ selected_horse.gender.title }}</span><br>
+    <span>Возраст: {{ selected_horse.age }}</span>
+   
+    {% set competitions = selected_horse.competitions %}
+    {% if competitions %}
+        {% for competition in competitions %}
+            <div class="border border-1 rounded-3 p-4 row my-2">
+                <div class="col-md-8">
+
+                    <span><span class="fs-3 fw-bold">{{ competition.title }}</span> <span class="fs-5">{{ competition.date }}</span></span>
+                    <p>{{ competition.place }}</p>
+                </div>
+                {% set info_about_horse = competition.info_about_horse(selected_horse.id) %}
+                {% if info_about_horse %}
+                <div class="col-md-4">
+                    <h3>Место: {{ info_about_horse.place }}</h4>
+                    <h4>Время: {{ info_about_horse.time }}</h4>
+                </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+</div>
+{% endif %}
+{% endblock %}

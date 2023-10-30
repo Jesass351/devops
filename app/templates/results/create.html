@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+<div class="container">
+    <h2>Результаты соревнования "{{ competition.title }}"</h2>
+    <form action="{{ url_for('results.create', competition_id=competition.id) }}" method="post" class="d-flex justify-content-center flex-column my-4">
+        <div class="mb-2">
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Лошадь</th>
+                      <th scope="col">Время</th>
+                      <th scope="col">Место</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {% for horse in competition.horses %}
+                    <tr>
+                        <input type="text" class="d-none" value="{{ horse.horses_to_competitions.id }}" id="horses_to_competitions" name="horses_to_competitions">
+                        <input type="text" class="d-none" id="horse_id" name="horse_id" value="{{ horse.id }}">
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ horse.name }}</td>
+                        <td><input type="text" class="form-control" id="horse_time" name="horse_time" placeholder="1:47.2"></td>
+                        <td><input type="number" min="1" class="form-control" id="horse_place" name="horse_place" placeholder="{{ loop.index }}"></td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+            </table>
+           
+        </div>
+        <button type="submit" class="btn btn-dark">Добавить</button>
+    </form>
+</div>
+
+<script src="{{ url_for('static', filename='select_results.js') }}">
+</script>
+{% endblock %}

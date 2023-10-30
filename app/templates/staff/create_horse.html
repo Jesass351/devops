@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+<div class="container">
+    <h2>Добавление лошади</h2>
+    <form action="{{ url_for('staff.create_horse') }}" method="post" class="d-flex justify-content-center flex-column my-4">
+      <div class="row mb-2">
+
+        <label for="name">Имя лошади</label>
+        <input type="text" class="form-control" id="name" name="name">
+        
+        <label for="age">Возраст лошади</label>
+        <input type="text" class="form-control  mb-2" id="age" name="age">
+        <label for="gender">Пол лошади</label>
+
+        <select name="gender" id="gender" class="form-select  mb-2">
+          {% for gender in genders %}
+            <option value="{{ gender.id }}">{{ gender.title }}</option>
+          {% endfor %}
+        </select>
+        <label for="owner">Владелец лошади</label>
+
+        <select name="owner" id="owner" class="form-select mb-2">
+          {% for owner in owners %}
+            <option value="{{ owner.id }}">{{ owner.name }}</option>
+          {% endfor %}
+        </select>
+        <label for="jokey">Жокей</label>
+
+        <select name="jokey" id="jokey" class="form-select  mb-2">
+          {% for jokey in jokeys %}
+            <option value="{{ jokey.id }}">{{ jokey.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+           
+        <button type="submit" class="btn btn-dark">Добавить</button>
+    </form>
+</div>
+
+<script src="{{ url_for('static', filename='select_results.js') }}">
+</script>
+{% endblock %}

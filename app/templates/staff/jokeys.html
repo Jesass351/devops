@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="" method="post">
+        <div class="container my-4 d-flex justify-content-center row">
+            <div class="col-md-8">
+                <select name="jokey_id" id="jokey_id" class="form-select">
+                    {% for jokey in jokeys %}
+                        <option value="{{ jokey.id }}">{{ jokey.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">Найти</button>
+            </div>
+
+    </div>
+    </form>
+{% if selected_jokey %}
+<div class="container">
+    <h2>{{ selected_jokey.name }}</h2>
+    <h4>Адрес: {{ selected_jokey.address }}</h4>
+    <h4>Рейтинг: {{ selected_jokey.age }}</h4>
+    <span>Возраст: {{ selected_jokey.rating }}</span><br>
+    <span>{{ selected_jokey.competitions }}</span>
+   
+    {% set horses = selected_jokey.horses %}
+    {% if horses %}
+        {% for horse in horses %}
+            {% set competitions = horse.competitions %}
+            {% for competition in competitions %}
+                <div class="border border-1 rounded-3 p-4 row my-2">
+                    <div class="col-md-8">
+                        <span>Лошадь: {{ horse.name }}</span><br>
+                        <span><span class="fs-3 fw-bold">{{ competition.title }}</span> <span class="fs-5">{{ competition.date }}</span></span>
+                        <p>{{ competition.place }}</p>
+                    </div>
+                    {% set info_about_horse = competition.info_about_horse(horse.id) %}
+                    {% if info_about_horse %}
+                    <div class="col-md-4">
+                        <h3>Место: {{ info_about_horse.place }}</h4>
+                        <h4>Время: {{ info_about_horse.time }}</h4>
+                    </div>
+                    {% endif %}
+
+                </div>
+            {% endfor %}
+         {% endfor %}
+    {% endif %}
+
+</div>
+{% endif %}
+{% endblock %}

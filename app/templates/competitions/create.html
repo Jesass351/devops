@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+
+    <form method="POST" action="{{ url_for('competitions.create') }}" enctype="multipart/form-data">
+        <div class="row">
+
+
+            <div class="col-md-6">
+                <label for="title">Название соревнования</label>
+                <input class="form-control" name="title" id="title" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="author">Дата и время соревнования</label>
+                <input class="form-control" type="datetime-local" name="date" id="date" required>
+            </div>
+
+
+            <div class="col-md-12">
+                <label for="year">Место проведения</label>
+                <input class="form-control" name="place" id="place" required>
+            </div>
+
+            <div id="genres" class="col-md-12">
+                <label for="horses">Лошади</label>
+                {% if horses %}
+                <select class="form-select" multiple name="horses" id="horses">
+                    {% for horse in horses %}
+                    <option value="{{ horse.id }}">{{ horse.name }}</option>
+                    {% endfor %}
+                {% endif %}
+                </select>
+            </div>
+
+            <div class="m-3 text-center">
+                <input type="submit" class="btn btn-dark" value="Сохранить">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

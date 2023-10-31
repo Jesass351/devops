@@ -35,8 +35,8 @@ app.register_blueprint(results_bp)
 app.register_blueprint(staff_bp)
 
 
-
 init_login_manager(app)
+
 
 # from models import Book, Cover
 
@@ -69,7 +69,6 @@ def index():
     #     pages = 1
     #     )
 
-@app.route('/covers/<cover_id>')
 def cover(cover_id):
     img = db.get_or_404(Cover, cover_id)
     return send_from_directory(app.config['UPLOAD_FOLDER'],

@@ -96,38 +96,6 @@ def create_jokey():
         # flash('Ошибка при отображении формы', 'danger')
         # return redirect(url_for('index'))
 
-@bp.route('/create/<int:competition_id>', methods=['POST'])
-@login_required
-def create(competition_id):
-    # try:
-        horses_places = request.form.getlist('horse_place')
-        horses_times = request.form.getlist('horse_time')
-        horses_ids = request.form.getlist('horse_id')
-        horses_to_competitions = request.form.getlist('horses_to_competitions')
-        
-        print(horses_ids)
-        print(horses_places)
-        print(horses_times)
-        print(horses_to_competitions)
-        
-        
-        
-        print('-------------')
-
-        for i in range(len(horses_ids)):
-            result = Result(horses_to_competitions_id = horses_to_competitions[i], place = horses_places[i], time=horses_times[i]) 
-            db.session.add(result)
-            db.session.commit()
-            
-            results_competitions = Result_To_Competition(result_id = result.id, competition_id = competition_id)
-            db.session.add(results_competitions)
-            db.session.commit()
-        flash('Рецензия добавлена', 'success')
-        return redirect(url_for('books.detailed', book_id=book_id))
-    # except:
-        # flash('Ошибка при создании рецензии', 'danger')
-        # return redirect(url_for('reviews.create', book_id = book_id))
-
         
 
         

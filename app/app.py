@@ -3,11 +3,9 @@ from sqlalchemy import MetaData, func
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from math import ceil
-from flaskext.markdown import Markdown
 
 app = Flask(__name__)
 application = app
-Markdown(app)
 
 app.config.from_pyfile('config.py')
 

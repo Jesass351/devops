@@ -21,7 +21,7 @@ def load_user(user_id):
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
-    try:
+    # try:
         if request.method == 'POST':
             login = request.form.get('login')
             password = request.form.get('password')
@@ -43,19 +43,19 @@ def login():
             return redirect(url_for('auth.login'))
         if request.method == 'GET':
             return render_template('auth/login.html')
-    except:
-        flash('Ошибка при загрузке', 'danger')
-        return redirect(url_for('index'))
+    # except:
+    #     flash('Ошибка при загрузке', 'danger')
+    #     return redirect(url_for('index'))
 
 @bp.route('/logout')
 @login_required
 def logout():
-    try:
+    # try:
         logout_user()
         return redirect(url_for('index'))
-    except:
-        flash('Ошибка. Попробуйте позже', 'danger')
-        return redirect(url_for('index'))
+    # except:
+    #     flash('Ошибка. Попробуйте позже', 'danger')
+    #     return redirect(url_for('index'))
 
 def check_rights(action):
     def decorator(func):

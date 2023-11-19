@@ -1,0 +1,17 @@
+version: '3'
+services:
+  mysql_db:
+    container_name: mysql_db
+    hostname: mysql_db
+    image: mysql:8.1.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=devops
+      - MYSQL_DATABASE=devops
+    restart: unless-stopped
+    volumes:
+      - ./db_dump:/docker-entrypoint-initdb.d
+      - mysql_db:/var/lib/mysql
+volumes:
+  mysql:

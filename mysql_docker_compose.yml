@@ -12,6 +12,10 @@ services:
     restart: unless-stopped
     volumes:
       - ./db_dump:/docker-entrypoint-initdb.d
-      - mysql_db:/var/lib/mysql
-volumes:
-  mysql:
+    networks:
+      - app
+networks:
+  app:
+    name: app
+    driver: bridge
+    external: true

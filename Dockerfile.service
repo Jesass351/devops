@@ -1,4 +1,5 @@
 FROM python:3.12
+
 EXPOSE 8000
 WORKDIR /usr/app
 
@@ -7,5 +8,6 @@ RUN pip install Cmake
 RUN pip install --only-binary :all: greenlet
 RUN pip install -r requirements.txt
 RUN pip install waitress
+
 COPY /app /usr/app/
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8000"]
+CMD waitress-serve --host 0.0.0.0 --port 8000 app:app

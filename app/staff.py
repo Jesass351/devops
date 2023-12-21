@@ -51,6 +51,7 @@ def create_horse():
         
         db.session.add(horse)
         db.session.commit()
+        flash('Лошадь успешно добавлена','success')
         
         return redirect(url_for('index'))
         
@@ -71,6 +72,7 @@ def create_owner():
         owner = Owner(name=name, address=address, phone=phone)
         db.session.add(owner)
         db.session.commit()
+        flash('Владелец успешно добавлен','success')
         return redirect(url_for('index'))
     # except:
         # flash('Ошибка при отображении формы', 'danger')
@@ -91,6 +93,7 @@ def create_jokey():
         jokey = Jokey(name=name, address=address, rating=rating,age=age )
         db.session.add(jokey)
         db.session.commit()
+        flash('Жокей успешно добавлен','success')
         return redirect(url_for('index'))
     # except:
         # flash('Ошибка при отображении формы', 'danger')

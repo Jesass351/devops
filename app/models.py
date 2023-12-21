@@ -133,7 +133,7 @@ class Competition(db.Model):
     __tablename__ = 'competitions'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.String(100), nullable=False)
     place = db.Column(db.String(100), nullable=False)
     
     @property

@@ -47,6 +47,8 @@ def create():
         for horse in horses:
             db.session.add(Horse_To_Competition(horse_id = horse,competition_id = competition.id))
         db.session.commit()
+        
+        flash('Соревнование успешно добавлено', 'success')
 
         return redirect(url_for('index'))
     # except:

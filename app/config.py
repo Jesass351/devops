@@ -2,7 +2,7 @@ import os
 
 SECRET_KEY = 'kdnndkkw'
 
-SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:devops@mysql_db:3306/devops'
+SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://std_2033_devops:12345678@std-mysql.ist.mospolytech.ru/std_2033_devops'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_ECHO = True
 

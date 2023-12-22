@@ -11,7 +11,7 @@ def auth(driver, address):
 def login(driver, address):
     try:
         data = {
-            'login':'admin',
+            'login':'hfgjff',
             'password':'admin'
         }
         driver.get(f"{address}/auth/login")

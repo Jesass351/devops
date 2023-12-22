@@ -12,7 +12,7 @@ from horse import horse
 from competition import competition
 from results import result
 
-BASE_ADDRESS = 'http://127.0.0.1:5000'
+BASE_ADDRESS = 'http://192.168.51.145:8000/'
 
 options = webdriver.ChromeOptions()
 options.add_experimental_option("excludeSwitches", ["enable-logging"])

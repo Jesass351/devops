@@ -12,7 +12,7 @@ rw = RandomWord(max_word_size = 13,
                 include_special_chars=False)
 
 def competition(driver, address):
-    result_add = add(driver)
+    result_add = add(driver, address)
     if not result_add:
         return False
     

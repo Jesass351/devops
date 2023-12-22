@@ -10,15 +10,15 @@ rw = RandomWord(max_word_size = 13,
                 special_chars=r"@_!#$%^&*()<>?/\|}{~:",
                 include_special_chars=False)
 
-def result(driver):
-    result_add = add(driver)
+def result(driver, address):
+    result_add = add(driver, address)
     if not result_add:
         return False
     
     return True
 
 
-def add(driver):
+def add(driver, address):
     # try:
         place = ''
         for i in range(random.randint(1,5)):
@@ -28,7 +28,7 @@ def add(driver):
             'place': place,
             'date': datetime.datetime.now().strftime("%d.%m.%Y %H:%M"),
         }
-        driver.get("http://127.0.0.1:5000/results/create_form/1")
+        driver.get(f"{address}/results/create_form/1")
         horses_times = driver.find_elements(By.ID, 'horse_time')
         horses_places = driver.find_elements(By.ID, 'horse_place')
         

@@ -9,14 +9,14 @@ rw = RandomWord(max_word_size = 13,
                 special_chars=r"@_!#$%^&*()<>?/\|}{~:",
                 include_special_chars=False)
 
-def jokey(driver):
-    result_add = add(driver)
+def jokey(driver, address):
+    result_add = add(driver, address)
     if not result_add:
         return False
     return True
 
 
-def add(driver):
+def add(driver, addr):
     try:
         address = ''
         for i in range(random.randint(1,5)):
@@ -27,7 +27,7 @@ def add(driver):
             'age': random.randint(18,90),
             'rating': random.randrange(11, 50) / 10
         }
-        driver.get("http://127.0.0.1:5000/staff/create_jokey")
+        driver.get(f"{addr}/staff/create_jokey")
         input_name = driver.find_element(By.ID, "name")
         input_address = driver.find_element(By.ID, "address")
         input_age = driver.find_element(By.ID, "age")

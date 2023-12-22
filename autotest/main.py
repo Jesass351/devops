@@ -12,6 +12,8 @@ from horse import horse
 from competition import competition
 from results import result
 
+BASE_ADDRESS = 'http://127.0.0.1:5000'
+
 options = webdriver.ChromeOptions()
 options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
@@ -20,28 +22,28 @@ driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())
 driver.maximize_window()
 driver.implicitly_wait(60)
    
-driver.get("http://127.0.0.1:5000")
+driver.get(BASE_ADDRESS)
 
 
-result_auth  = auth(driver=driver)
+result_auth  = auth(driver=driver, address=BASE_ADDRESS)
 assert result_auth == True, "Ошибка при авторизации"
 
-result_jokey  = jokey(driver=driver)
+result_jokey  = jokey(driver=driver, address=BASE_ADDRESS)
 assert result_jokey == True, "Ошибка при добавлении жокея"
 
-result_owner  = owner(driver=driver)
+result_owner  = owner(driver=driver, address=BASE_ADDRESS)
 assert result_owner == True, "Ошибка при добавлении владельца"
 
 
 for i in range(2):
-    result_horse  = horse(driver=driver)
+    result_horse  = horse(driver=driver, address=BASE_ADDRESS)
     assert result_horse == True, "Ошибка при добавлении лошади"
     
-result_competition = competition(driver=driver)
+result_competition = competition(driver=driver, address=BASE_ADDRESS)
 assert result_competition == True, "Ошибка при добавлении соревнования"
 
-result_results = result(driver=driver)
-assert result_results == True, "Ошибка при добавлении соревнования"
+result_results = result(driver=driver, address=BASE_ADDRESS)
+assert result_results == True, "Ошибка при добавлении результата сорвенования"
 
 
 

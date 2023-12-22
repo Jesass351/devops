@@ -9,15 +9,15 @@ rw = RandomWord(max_word_size = 13,
                 special_chars=r"@_!#$%^&*()<>?/\|}{~:",
                 include_special_chars=False)
 
-def owner(driver):
-    result_add = add(driver)
+def owner(driver, address):
+    result_add = add(driver, address)
     if not result_add:
         return False
     
     return True
 
 
-def add(driver):
+def add(driver, addr):
     # try:
         address = ''
         phone_number = PhoneNumber("DE").get_number()
@@ -28,7 +28,7 @@ def add(driver):
             'address': address,
             'phone': phone_number
         }
-        driver.get("http://127.0.0.1:5000/staff/create_owner")
+        driver.get(f"{addr}/staff/create_owner")
         input_name = driver.find_element(By.ID, "name")
         input_address = driver.find_element(By.ID, "address")
         input_phone = driver.find_element(By.ID, "phone")

@@ -1,20 +1,20 @@
 from selenium.webdriver.common.by import By
 
-def auth(driver):
-    result_login = login(driver)
+def auth(driver, address):
+    result_login = login(driver, address)
     if not result_login:
         return False
     
     return True
 
 
-def login(driver):
+def login(driver, address):
     try:
         data = {
             'login':'admin',
             'password':'admin'
         }
-        driver.get("http://127.0.0.1:5000/auth/login")
+        driver.get(f"{address}/auth/login")
         input_username = driver.find_element(By.ID, "login")
         input_password = driver.find_element(By.ID, "password")
         input_username.send_keys(data['login'])

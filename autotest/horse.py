@@ -9,21 +9,21 @@ rw = RandomWord(max_word_size = 13,
                 special_chars=r"@_!#$%^&*()<>?/\|}{~:",
                 include_special_chars=False)
 
-def horse(driver):
-    result_add = add(driver)
+def horse(driver, address):
+    result_add = add(driver, address)
     if not result_add:
         return False
     
     return True
 
 
-def add(driver):
+def add(driver, address):
     # try:
         data = {
             'name':rw.generate(),
             'age': random.randint(2,20),
         }
-        driver.get("http://127.0.0.1:5000/staff/create_horse")
+        driver.get(f"{address}/staff/create_horse")
         input_name = driver.find_element(By.ID, "name")
         input_age = driver.find_element(By.ID, "age")
         gender_select = Select(driver.find_element(By.ID, "gender"))

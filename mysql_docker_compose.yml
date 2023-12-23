@@ -5,25 +5,17 @@ services:
     hostname: mysql_db
     image: mysql:8.1.0
     ports:
-      - "32001:3306"
+      - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=devops
       - MYSQL_DATABASE=devops
     restart: unless-stopped
     volumes:
       - ./db_dump:/docker-entrypoint-initdb.d
-      - mysql_db:/var/lib/mysql
-  hr_app:
-    container_name: hr_app
-    hostname: hr_app
-    build: 
-      context: .
-      dockerfile: Dockerfile.service
-    ports:
-      - 8000:8000
-    restart: always
-    depends_on:
-      - mysql_db
-      
-volumes:
-  mysql_db:
+    networks:
+      - app
+networks:
+  app:
+    name: app
+    driver: bridge
+    external: true

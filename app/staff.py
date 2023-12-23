@@ -3,14 +3,24 @@ from app import db
 from models import Horse, Jokey, Gender, Owner, Result
 from flask_login import login_required, current_user
 from bleach import clean
+from prometheus_client import generate_latest
+from prometheus_client import Counter
 
 bp = Blueprint('staff', __name__, url_prefix='/staff')
+c = Counter('requests_for_horses', 'Number of runs of the process_request method', ['method', 'endpoint'])
+
 
 @bp.route('horses', methods=['POST', 'GET'])
 def horses():
     if request.method == 'GET':
+        path = str(request.path)
+        verb = request.method
+        label_dict = {"method": verb, "endpoint": path}
+        c.labels(**label_dict).inc()
+    
         horses = db.session.execute(db.select(Horse)).scalars()
         return render_template('staff/horses.html', horses=horses)
+
     if request.method == 'POST':
         horse_id = request.form.get('horse_id')
         horses = db.session.execute(db.select(Horse)).scalars()
@@ -51,6 +61,7 @@ def create_horse():
         
         db.session.add(horse)
         db.session.commit()
+        flash('Лошадь успешно добавлена','success')
         
         return redirect(url_for('index'))
         
@@ -71,6 +82,7 @@ def create_owner():
         owner = Owner(name=name, address=address, phone=phone)
         db.session.add(owner)
         db.session.commit()
+        flash('Владелец успешно добавлен','success')
         return redirect(url_for('index'))
     # except:
         # flash('Ошибка при отображении формы', 'danger')
@@ -91,6 +103,7 @@ def create_jokey():
         jokey = Jokey(name=name, address=address, rating=rating,age=age )
         db.session.add(jokey)
         db.session.commit()
+        flash('Жокей успешно добавлен','success')
         return redirect(url_for('index'))
     # except:
         # flash('Ошибка при отображении формы', 'danger')

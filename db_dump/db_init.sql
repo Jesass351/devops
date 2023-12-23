@@ -10,7 +10,7 @@ INSERT INTO `alembic_version` (`version_num`) VALUES
 CREATE TABLE `competitions` (
   `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
-  `date` datetime NOT NULL,
+  `date` varchar(100) NOT NULL,
   `place` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

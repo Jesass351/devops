@@ -16,9 +16,7 @@ services:
   hr_app:
     container_name: hr_app
     hostname: hr_app
-    build: 
-      context: .
-      dockerfile: Dockerfile.service
+    image: test.local:5000/hr_app:latest
     ports:
       - 8000:8000
     restart: always

@@ -13,6 +13,8 @@ class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
     desc = db.Column(db.Text, nullable=False)
+    test = db.Column(db.Text)
+    
 
     def __repr__(self):
         return '<Role %r>' % self.title

@@ -4,6 +4,8 @@ SECRET_KEY = 'kdnndkkw'
 
 
 SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:devops@mysql_db:3306/devops'
+# SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://test:test@localhost:3306/devops'
+
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_ECHO = True
 
